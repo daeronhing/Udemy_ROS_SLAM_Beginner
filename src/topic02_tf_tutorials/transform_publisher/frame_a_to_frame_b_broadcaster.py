@@ -17,10 +17,10 @@ if __name__ == '__main__':
     while(not rospy.is_shutdown()):
 
         #create a quaternion
-        rotation_quaternion = tf.transformations.quaternion_from_euler(0.2, 0.3, 0.1)
+        rotation_quaternion = tf.transformations.quaternion_from_euler(0, 0, 0)
 
         #translation vector
-        translation_vector = (1.0, 2.0, 3.0)
+        translation_vector = (1.0, 0, 0)
 
         #time
         current_time = rospy.Time.now()

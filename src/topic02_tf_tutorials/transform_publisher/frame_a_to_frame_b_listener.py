@@ -18,11 +18,10 @@ if __name__ == '__main__':
         except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
             continue
 
-        quaternion = rot
-        rpy=tf.transformations.euler_from_quaternion(quaternion)
-        print 'transformation between frame_a and frame_b detected'
-        print 'translation vector: (',trans[0],',',trans[1],',',trans[2],')'
-        print 'rotation angles: roll=',rpy[0],' pitch=',rpy[1],' yaw=',rpy[2]
+        rpy=tf.transformations.euler_from_quaternion(rot)
+        print("\ntranslation: %f, %f, %f"%(trans[0],trans[1],trans[2]))
+        print(type(trans))
+        # print 'rotation angles: roll=',rpy[0],' pitch=',rpy[1],' yaw=',rpy[2]
 
 
         rate.sleep()

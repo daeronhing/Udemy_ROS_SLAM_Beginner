@@ -1,11 +1,4 @@
-#!/usr/bin/env python  
-import roslib
-import rospy
-import tf
-import time  
-import math
-import time
-#!/usr/bin/env python  
+#!/usr/bin/env python3
 import roslib
 import rospy
 import tf

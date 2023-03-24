@@ -3,26 +3,38 @@ This notes contains quick guide about transformation and the basic usage of TF p
 
 Add these in package.xml
 ```xml
-<build_depend>geometry_msgs</build_depend>
+<build_depend>geometry_msgs</build_depend> # For SLAM
 <build_depend>std_msgs</build_depend>
-<build_depend>nav_msgs</build_depend>
+<build_depend>nav_msgs</build_depend> # For SLAM
 
 <build_export_depend>geometry_msgs</build_export_depend>
 <build_export_depend>tf</build_export_depend>
 
-<exec_depend>geometry_msgs</exec_depend>
-<exec_depend>nav_msgs</exec_depend>
+<exec_depend>geometry_msgs</exec_depend>  # For SLAM
+<exec_depend>nav_msgs</exec_depend>   # For SLAM
 <exec_depend>tf</exec_depend>
 ```
 
 These changes need to be made in CMakeList
 ```
 find_package(catkin REQUIRED COMPONENTS
-  geometry_msgs # Add
-  nav_msgs      # Add
+  geometry_msgs # Add for SLAM
+  nav_msgs      # Add for SLAM
   tf            # Add
 )
 ```
+
+# Content
+- [2D Transformation](#2d-transformation)
+- [3D Rotation](#3d-rotation)
+- [TF Package](#tf-package)
+  - [Useful command lines](#useful-command-lines)
+    - [view_frames](#1-view_frames)
+    - [tf_monitor](#2-tf_monitor)
+    - [tf_echo](#3-tf_echo)
+  - [Transform Broadcaster](#transform_broadcaster)
+  - [Transform Listener](#transform_listener)
+  - [Roll, Pitch, Yaw & Quaternion Conversion](#rollpitchyaw--quaternion-conversion)
 
 # 2D Transformation
 From frame 1 rotated angle $\theta$ to frame 2. Transformation (translation + rotation) between frame 1 and 2 is as follow:
@@ -81,8 +93,6 @@ This command shows the current translation and rotation from frame_A to frame_B 
 ```
 rosrun tf tf_echo frame_A frame_B
 ```
-### 4. roswtf
-This tfwtf plugin helps to track down problems with tf.
 
 ## transform_broadcaster
 This is used to send transformation updates to the "/tf" topic

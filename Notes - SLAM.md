@@ -1,6 +1,20 @@
 # Notes for SLAM and Navigation in ROS
 This note contains some basic understanding of SLAM, navigation and map, included demo using turtlebot3, and tuning of the parameters.
 
+# Content
+- [SLAM](#slam-simultaneous-localization-and-mapping)
+- [Map-based Navigation](#map-based-navigation)
+- [Demos](#demos)
+    - [SLAM](#1-slam-demo-using-turtlebot3)
+    - [Navigation](#2-map-based-navigation-demo-using-turtlebot3)
+- [Map Structure](#map-structure)
+- [Robot Setup to Support ROS Navigation Stack](#robot-setup-to-support-the-ros-navigation-stack)
+- [Navigation Parameter Tuning](#navigation-parameter-tuning)
+    - [Velocity & Acceleration](#1-velocity--acceleration)
+    - [Global Planner](#2-global-planner-parameter-tuning)
+    - [Local Planner](#3-local-planner-parameter-tuning)
+- [Reactive Navigation](#reactive-navigation-bug-algorithm)
+
 # SLAM (Simultaneous Localization and Mapping)
 There are several SLAM approaches in ROS:
 1. gmapping: contains a ROS wrapper for OpenSlam's Gmapping.
@@ -28,7 +42,7 @@ roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
 rosrun map_server map_saver -f [directory to save map files]
 ```
 
-## Map-based navigation demo using Turtlebot3
+## 2. Map-based navigation demo using Turtlebot3
 1. Start Turtlebot3 simulation
 2. Launch navigation file
 
@@ -65,7 +79,7 @@ free_threshold      # If occupancy probability < threshold, it is completely fre
 ```
 
 # Robot Setup to Support The ROS Navigation Stack
-![image](/home/daeronhing/Desktop/ROS_OpenCV/catkin_ws/src/ros_course_part2/overview_tf.png)
+![image](overview_tf.png)
 
 List to setup:
 1. Transformation (describe the relation between coordinate frames, through urdf or tf broadcaster)
@@ -75,14 +89,13 @@ List to setup:
 5. Mapping (map_server)
 
 # Navigation Parameter Tuning
-## 1. Tuning max/min velocity & acceleration
+## 1. Velocity & Acceleration
 - Parameters of the velocity and acceleration are provided in the yaml configuration file of the local planner.
 - For turtlebot3, the parameters are located at turtlebot3_navigation/param
 
 ### 1.1 How to obtain maximum velocity?
-1. Use a joystick
-2. Translation: Move robot in a straight line until speed becomes constant, then echo the odom topic and record the maximum speed value
-3. Rotation: Rotate the robot until it reaches a constant speed, then echo odom and record maximum speed value
+1. Translation: Move robot in a straight line until speed becomes constant, then echo the odom topic and record the maximum speed value
+2. Rotation: Rotate the robot until it reaches a constant speed, then echo odom and record maximum speed value
 
 ### 1.2 How to obtain maximum acceleration
 1. Try to get from motors manual
@@ -91,7 +104,7 @@ List to setup:
 4. accel_rotation = Wmax/t_Wmax
 
 ### 1.3 How to set minimum values
-- Set the minimum translation and rotation to negative value so that it can move in two directions
+Set the minimum translation and rotation to negative value so that it can move in two directions
 
 ## 2. Global Planner Parameter Tuning
 Global planner is responsible for finding a global obstacle-free path from initial location to the goal location using environment map
